@@ -1,0 +1,49 @@
+matrix=[[0,1,1,0,0,0,0,0,0,0],[1,0,0,1,1,0,0,0,0,0],[1,0,0,0,0,1,1,0,0,0],[0,1,0,0,0,0,0,1,0,0],[0,1,0,0,0,0,0,0,1,0],[0,0,1,0,0,0,0,0,0,0],[0,0,1,0,0,0,0,0,0,1],[0,0,0,1,0,0,0,0,0,0],[0,0,0,0,1,0,0,0,0,0],[0,0,0,0,0,0,1,0,0,0]]
+visited=[0,0,0,0,0,0,0,0,0,0]
+k=0
+novisi=1
+perlu=[]
+g=int(input("Enter the Goal Node:"))
+while(True):
+    if(k==0):
+        print("Iteration-",0)
+        print(0)
+        if(g==0):
+            print("Goal Found!!!")
+            break
+        for i in range(len(matrix)):
+           if(matrix[0][i]!=0):
+               perlu.append(i)
+        tirugu=1+len(perlu)
+    else:
+        novisi=0
+        printed=[]
+        print("Iteration-",k)
+        l=[0]
+        visited=[0,0,0,0,0,0,0,0,0,0]
+        for x in range(tirugu):
+            a=l.pop(0)
+            visited[a]=1
+            print(a)
+            printed.append(a)
+            novisi+=1
+            if(a==g):
+                print("Goal Found!!!")
+                exit(0)
+                break
+            for i in range(len(matrix)):
+                if(matrix[a][i]!=0 and visited[i]!=1):
+                    l.append(i)
+                    visited[i]=1
+        h=[]
+        for x in perlu:
+            for y in range(len(matrix)):
+                if(matrix[x][y]!=0 and y not in printed):
+                    h.append(y)
+        tirugu=tirugu+len(h)
+        perlu=h
+        if(novisi==len(matrix)):
+            print("All Nodes are visited! Goal Cannot be Found!!!")
+            exit(0)
+            break
+    k=k+1
