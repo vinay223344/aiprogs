@@ -1,0 +1,43 @@
+def sort_based_on_costs(l):
+    g={}
+    w=sorted(l.values())
+    for x in w:
+        for y in l.keys():
+            if(x==l[y]):
+                if(y not in g.keys()):
+                    g.update({y:x})
+    return g
+inf=999
+matrix=[[inf,6,4,inf,inf,inf,inf,inf],[inf,inf,inf,4,inf,inf,inf,inf],[inf,inf,inf,inf,inf,8,inf,inf],[inf,inf,inf,inf,inf,inf,2,inf],[inf,inf,inf,inf,inf,inf,inf,inf],[inf,inf,inf,inf,9,inf,inf,7],[inf,inf,inf,inf,9,inf,inf,3],[inf,inf,inf,inf,4,inf,inf,inf]]
+l={0:0}
+visited=[0,0,0,0,0,0,0,0]
+parent={0:None}
+g=int(input("Enter the Goal:"))
+cm=[0,inf,inf,inf,inf,inf,inf,inf]
+while(True):
+    if(len(list(l.keys()))==0):
+        print("Goal cannot be Found!!!")
+        break
+    a=list(l.keys())[0]
+    if(a==g):
+        print("Goal Found!!!")
+        result=[g]
+        q=parent[g]
+        while(q!=None):
+            result.append(q)
+            q=parent[q]
+        print("Path to be followed is:",'->'.join(str(e) for e in result[::-1]))
+        print("Cost required is ",cm[a])
+        break
+    l.pop(a)
+    visited[a]=1
+    h={}
+    for i in range(len(matrix)):
+        if(matrix[a][i]!=inf and visited[i]!=1):
+            newcost=matrix[a][i]+cm[a]
+            if(newcost<cm[i]):
+                parent[i]=a
+                cm[i]=newcost
+                h[i]=cm[i]
+    l.update(h)
+    l=sort_based_on_costs(l)
