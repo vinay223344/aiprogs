@@ -1,0 +1,27 @@
+visited=[]
+working=[[0,0]]
+a,b=[int(x) for x in input("Enter the Jug Capacities:").split()]
+g=int(input("Enter the Goal Capacity:"))
+while(True):
+    if(len(working)==0):
+        print("Goal Not Found!!!")
+        exit(0)
+    w=working.pop()
+    visited.append(w)
+    print(w)
+    if(g in w):
+        print("Goal Found!!!")
+        exit(0)
+    temp=[[a,w[1]],[w[0],b],[0,w[1]],[w[0],0]]
+    if(a-w[0]>=w[1]):
+        temp.append([w[0]+w[1],0])
+    if(a-w[0]<w[1]):
+        temp.append([w[0]+a-w[0],w[1]-(a-w[0])])
+    if(b-w[1]>=w[0]):
+        temp.append([0,w[0]+w[1]])
+    if(b-w[1]<w[0]):
+        temp.append([w[0]-(b-w[1]),w[1]+b-w[1]])
+    for x in temp:
+        if(x not in visited):
+            working.append(x)
+            visited.append(x)
