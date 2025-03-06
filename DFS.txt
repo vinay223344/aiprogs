@@ -1,0 +1,12 @@
+matrix=[[0,1,1,0],[1,0,0,1],[1,0,0,0],[0,1,0,0]]
+l=[0]
+visited=[0,0,0,0]
+print("DFS Path is:")
+for x in range(len(matrix)):
+    a=l.pop()
+    visited[a]=1
+    print(a)
+    for y in range(len(matrix)):
+        if(matrix[a][y]!=0 and visited[y]!=1):
+            l.append(y)
+            visited[y]=1
