@@ -1,0 +1,119 @@
+#DFS
+'''n=int(input("Enter the Number of Rooms Present"))
+initial=[]
+for x in range(n):
+    print("Enter the condition of Room",x,"(0 for clean and 1 for dirty:",end="")
+    initial.append(int(input()))
+cleaner=int(input("Enter the Room No where Cleaner is Present:"))
+initial=[cleaner]+initial'''
+n=2
+initial=[0,1,1] #cleaner position,room conditions
+visited=[]
+l=[initial]
+a=[]
+final=[0 for i in range(n)]
+while(a[1:]!=final):
+    if(len(l)==0):
+        print("Cannot clean the Rooms!!!")
+        exit(0)
+        break
+    a=l.pop()
+    print(a)
+    children=[]
+    visited.append(a)
+    if(a[0]==0):
+        #moving right
+        temp=[1]+a[1:]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+        #sucking
+        temp=[0,0]+a[2:]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+    elif(a[0]==n-1):
+        #sucking
+        temp=a[0:n]+[0]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+        #moving left
+        temp=[n-2]+a[1:]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+    else:
+        temp=[a[0],a[1:a[0]]+[1]+a[a[0]+1:]]
+        if(temp not in children):
+            children.append(temp)
+            visited.append(temp)
+        temp=[a[0]-1,a[1:]]
+        if(temp not in children):
+            children.append(temp)
+            visited.append(temp)
+        temp=[a[0]+1,a[1:]]
+        if(temp not in children):
+            children.append(temp)
+            visited.append(temp)
+    l.extend(children)
+print("Cleaned all the Rooms!!!")#DFS
+'''n=int(input("Enter the Number of Rooms Present"))
+initial=[]
+for x in range(n):
+    print("Enter the condition of Room",x,"(0 for clean and 1 for dirty:",end="")
+    initial.append(int(input()))
+cleaner=int(input("Enter the Room No where Cleaner is Present:"))
+initial=[cleaner]+initial'''
+n=2
+initial=[0,1,1] #cleaner position,room conditions
+visited=[]
+l=[initial]
+a=[]
+final=[0 for i in range(n)]
+while(a[1:]!=final):
+    if(len(l)==0):
+        print("Cannot clean the Rooms!!!")
+        exit(0)
+        break
+    a=l.pop()
+    print(a)
+    children=[]
+    visited.append(a)
+    if(a[0]==0):
+        #moving right
+        temp=[1]+a[1:]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+        #sucking
+        temp=[0,0]+a[2:]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+    elif(a[0]==n-1):
+        #sucking
+        temp=a[0:n]+[0]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+        #moving left
+        temp=[n-2]+a[1:]
+        if(temp not in visited):
+            children.append(temp)
+            visited.append(temp)
+    else:
+        temp=[a[0],a[1:a[0]]+[1]+a[a[0]+1:]]
+        if(temp not in children):
+            children.append(temp)
+            visited.append(temp)
+        temp=[a[0]-1,a[1:]]
+        if(temp not in children):
+            children.append(temp)
+            visited.append(temp)
+        temp=[a[0]+1,a[1:]]
+        if(temp not in children):
+            children.append(temp)
+            visited.append(temp)
+    l.extend(children)
+print("Cleaned all the Rooms!!!")
